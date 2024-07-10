@@ -16,8 +16,16 @@ class ArticlePolicy < ApplicationPolicy
     true
   end
 
+  def show?
+    true
+  end
+
   def destroy?
     # Only the record owner can delete it
+    record.user == user
+  end
+
+  def update?
     record.user == user
   end
 
