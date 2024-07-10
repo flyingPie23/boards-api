@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :boards, only: [ :index, :show, :update, :create, :destroy ] do
-        resources :articles, only: [ :create, :destroy ]
+        resources :articles, only: [ :create, :destroy, :update, :show ]
       end
     end
   end

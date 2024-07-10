@@ -1,10 +1,13 @@
 class Api::V1::ArticlesController < Api::V1::BaseController
 
   acts_as_token_authentication_handler_for User
-  before_action :set_article, only: [:destroy ]
+  before_action :set_article, only: [:destroy, :update, :show]
 
   def index
     @articles = policy_scope(Articles)
+  end
+
+  def show
   end
 
 
@@ -17,7 +20,15 @@ class Api::V1::ArticlesController < Api::V1::BaseController
 
     authorize @article
     if @article.save
-      render 'api/v1/boards/show', locals: { board: @board }, status: :created
+      render :show, status: :created
+    else
+      render_error
+    end
+  end
+
+  def update
+    if @article.update(article_params)
+      render :show
     else
       render_error
     end
