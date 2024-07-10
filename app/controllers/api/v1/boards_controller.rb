@@ -10,6 +10,8 @@ class Api::V1::BoardsController < Api::V1::BaseController
 
   def show
     @user = @board.user
+
+    @article = Article.new
   end
 
   def create
